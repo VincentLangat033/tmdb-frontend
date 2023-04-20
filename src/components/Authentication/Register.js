@@ -54,16 +54,16 @@ function Register() {
 <div className="form-container">
     <h1>Sign up</h1>
     <form className="register-label" onSubmit={handlesubmit}>
-        <label for="username">Name:</label>
+        <label htmlfor="username">Name:</label>
         <input type="text" id="name" name="name" placeholder="Enter your name"  onChange={(e) => {
                   setname(e.target.value);
                 }} required />
-        <label for="username">Username:</label>
+        <label htmlfor="username">Username:</label>
         <input type="text" id="username" name="username" placeholder="Enter your username"  onChange={(e) => {
                   setusername(e.target.value);
                 }} required />
 
-        <label for="email">Email:</label>
+        <label htmlfor="email">Email:</label>
         <input type="email" id="email" name="email" placeholder="Enter your email" onChange={(e) => {
                   setemail(e.target.value);
                 }} required />
@@ -76,9 +76,9 @@ function Register() {
         <input type="submit" value="Sign up" />
     </form>
 
-    <h6 className="already-registered"> clAlready registered? Click here to  <NavLink to='/login'>
+    <h5 className="already-registered"> clAlready registered? Click here to  <NavLink to='/login'>
         <a href='#'> Logon  </a>
-        </NavLink></h6>
+        </NavLink></h5>
 </div>
 </div>
     </div>
