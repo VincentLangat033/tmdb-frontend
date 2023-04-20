@@ -10,75 +10,76 @@ function Login({setUser}) {
 
   const navigate = useNavigate();
   const form = useRef(null);
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (username === "" || password === "") {
-  //     console.log("empty state");
-  //     return;
-  //   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (username === "" || password === "") {
+      console.log("empty state");
+      return;
+    }
 
-  //   console.log(
-  //     JSON.stringify({
-  //       username,
-  //       password,
-  //     })
-  //   );
+    console.log(
+      JSON.stringify({
+        username,
+        password,
+      })
+    );
 
-  //   fetch("http://localhost:3000/users", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       username,
-  //       password,
-  //     })
-  //   }).then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => {setUser(user)
-  //         user.admin === true ? navigate("/") : navigate("/register");
-  //       });
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      })
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((user) => {setUser(user)
+          alert("Login successfull")
+          user.admin === true ? navigate("/") : navigate("/register");
+        });
 
-  //       setUsername("");
-  //       setPassword("");
-  //       // setIsShown((current) => !current);
-  //     } else {
-  //       alert("Failed to Log in");
-  //     }
-  //   });
+        setUsername("");
+        setPassword("");
+        // setIsShown((current) => !current);
+      } else {
+        alert("Failed to Log in");
+      }
+    });
 
-  //   form.current.reset();
-  // };
-  useEffect(()=>{
-    fetch("http://localhost:3000/users")
-    .then(res=>res.json())
-    .then(data=>
-      setusers(data),
-      // console.log(users, username, password)
-      )
+    form.current.reset();
+  };
+//   useEffect(()=>{
+//     fetch("http://localhost:3000/users")
+//     .then(res=>res.json())
+//     .then(data=>
+//       setusers(data),
+//       // console.log(users, username, password)
+//       )
     
-  },[])
+//   },[])
   
-function handleSubmit(e){
-   e.preventDefault()
+// function handleSubmit(e){
+//    e.preventDefault()
 
 
-  const foundUser = users.find(user => user.username === username && user.password === password);
+//   const foundUser = users.find(user => user.username === username && user.password === password);
 
-  if (foundUser) {
-    setUser(foundUser);
-    alert("Login successful");
-    navigate("/");
-  } else {
-    alert("Failed to log in");
-    console.log(username,password)
+//   if (foundUser) {
+//     setUser(foundUser);
+//     alert("Login successful");
+//     navigate("/");
+//   } else {
+//     alert("Failed to log in");
+//     console.log(username,password, users)
     
-    setUsername("");
-    setPassword("");
-    e.target.reset();
-  }
-}
+//     setUsername("");
+//     setPassword("");
+//     e.target.reset();
+//   }
+// }
    
   
   //  users.filter((user)=>{
