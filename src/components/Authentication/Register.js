@@ -76,7 +76,9 @@ function Register() {
         <input type="submit" value="Sign up" />
     </form>
 
-    <h6>Already registered? Click here to logon</h6>
+    <h6 className="already-registered"> clAlready registered? Click here to  <NavLink to='/login'>
+        <a href='#'> Logon  </a>
+        </NavLink></h6>
 </div>
 </div>
     </div>
