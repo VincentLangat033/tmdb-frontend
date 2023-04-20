@@ -48,10 +48,10 @@ function Register() {
   }
   return (
     <div>
-        <div class="container">
+        <div className="container">
 
 
-<div class="form-container">
+<div className="form-container">
     <h1>Sign up</h1>
     <form className="register-label" onSubmit={handlesubmit}>
         <label for="username">Name:</label>
