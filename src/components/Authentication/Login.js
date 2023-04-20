@@ -126,6 +126,9 @@ function Login({setUser}) {
 
 
     </form>
+    <h6 className="already-registered"> Dont have an Account? <NavLink to='/register'>
+        <a href='#'> Register  </a>
+        </NavLink></h6>
 
 			
         
