@@ -1,17 +1,42 @@
 import React from 'react'
 import './navbar.css'
+import { NavLink } from 'react-router-dom'
 
 function Navbar() {
   return (
     <div > 
 <nav>
   <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Login</a></li>
-    <li><a href="#">Register</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact Us</a></li>
+    <li>  
+      <NavLink to='/'>
+        <a href='#'> Home  </a>
+        </NavLink>
+        </li>
+        <li>  
+      <NavLink to='/'>
+        <a href='#'> About </a>
+        </NavLink>
+        </li>
+        <li>  
+      <NavLink to='/login'>
+        <a href='#'> Login  </a>
+        </NavLink>
+        </li>
+        <li>  
+      <NavLink to='/register'>
+        <a href='#'> Register </a>
+        </NavLink>
+        </li>
+        <li>  
+      <NavLink to='/'>
+        <a href='#'> Contact Us  </a>
+        </NavLink>
+        </li>
+        <li> Welcome,</li>
+
   </ul>
+
+
 </nav>
     </div>
   )
