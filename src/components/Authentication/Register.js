@@ -5,7 +5,7 @@ function Register() {
   const navigate = useNavigate()
 
   const [name, setname] = useState("");
-  const [user_name, setusername] = useState("");
+  const [username, setusername] = useState("");
   const [user, setUser] = useState("")
 
   const [email, setemail] = useState("");
@@ -13,12 +13,12 @@ function Register() {
 
   function handlesubmit(e) {
     e.preventDefault();
-    fetch("https://buk-a-meal.herokuapp.com/users", {
+    fetch("http://localhost:3000/users", {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify({
         name: name,
-        username: user_name,
+        username: username,
         email: email,
         password: password,
       }
@@ -28,7 +28,8 @@ function Register() {
     .then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
-         navigate("/login")
+        alert("Registration successful")
+         navigate("/")
          setname("");
          setemail("");
          setusername("")
@@ -37,7 +38,8 @@ function Register() {
 
       }
       else{
-        alert()
+        alert("Registration failed")
+        
 
       }
     });
@@ -51,17 +53,25 @@ function Register() {
 
 <div class="form-container">
     <h1>Sign up</h1>
-    <form>
+    <form className="register-label" onSubmit={handlesubmit}>
         <label for="username">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name" required />
+        <input type="text" id="name" name="name" placeholder="Enter your name"  onChange={(e) => {
+                  setname(e.target.value);
+                }} required />
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required />
+        <input type="text" id="username" name="username" placeholder="Enter your username"  onChange={(e) => {
+                  setusername(e.target.value);
+                }} required />
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        <input type="email" id="email" name="email" placeholder="Enter your email" onChange={(e) => {
+                  setemail(e.target.value);
+                }} required />
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        <input type="password" id="password" name="password" placeholder="Enter your password" onChange={(e) => {
+                  setpassword(e.target.value);
+                }} required />
 
         <input type="submit" value="Sign up" />
     </form>
