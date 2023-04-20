@@ -58,3 +58,6 @@ input[type=submit] {
 input[type=submit]:hover {
 	background-color: blue;
 }
+.already-registered{
+	margin-top: 15px;
+}
