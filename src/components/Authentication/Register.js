@@ -1,6 +1,49 @@
-import React from 'react'
+import React, {useState} from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate()
+
+  const [name, setname] = useState("");
+  const [user_name, setusername] = useState("");
+  const [user, setUser] = useState("")
+
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  function handlesubmit(e) {
+    e.preventDefault();
+    fetch("https://buk-a-meal.herokuapp.com/users", {
+      method: "POST",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name,
+        username: user_name,
+        email: email,
+        password: password,
+      }
+      ),
+
+    })
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+         navigate("/login")
+         setname("");
+         setemail("");
+         setusername("")
+         setpassword("");
+         e.target.reset("");
+
+      }
+      else{
+        alert()
+
+      }
+    });
+    
+
+  }
   return (
     <div>
         <div class="container">
