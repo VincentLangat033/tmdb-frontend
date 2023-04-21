@@ -2,6 +2,8 @@ import React from 'react'
 import './movie.css'
 
 function Movie() {
+
+  
   return (
     <div>
       <main id="main">
