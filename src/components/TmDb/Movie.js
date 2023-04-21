@@ -99,8 +99,8 @@ function Movie() {
                                         containerClassName={"youtube-container amru"}
                                         opts={
                                             {
-                                                width: '100%',
-                                                height: '100%',
+                                                width: '1200px',
+                                                height: '500px',
                                                 playerVars: {
                                                     autoplay: 1,
                                                     controls: 0,
@@ -126,13 +126,14 @@ function Movie() {
                                             : 'Sorry, no trailer available'}
                                         <h1>{movie.title}</h1>
                                         <p>{movie.overview}</p>
+                                        {/* <h6>{movie.average}</h6> */}
                                     </div>
                                 </div>
                             }
                         </div>
                         : null}
 
-                    <div className={"center-max-size container"}>
+                    <div className={"center-max-size movie-container"}>
                         {renderMovies()}
                     </div>
                 </main>
