@@ -6,14 +6,16 @@
 
 body {
 	font-family: Arial, sans-serif;
-	background-color: #f1f1f1;
+	/* background-color: #f1f1f1; */
 }
 
 .container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 50vh;
+	background-color: #666060;
+	height: fit-content;
+	
 }
 
 .form-container {
@@ -25,7 +27,12 @@ body {
 	width: 500px;
 
 }
-
+.form-container h1{
+	color: black;
+	font-size: 50px;
+	align-content: center;
+	margin-left: 5px;
+}
 form {
 	display: flex;
 	flex-direction: column;
