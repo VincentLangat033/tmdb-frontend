@@ -38,7 +38,7 @@ function Login({setUser}) {
       if (r.ok) {
         r.json().then((user) => {setUser(user)
           alert("Login successfull")
-          user.admin === true ? navigate("/") : navigate("/register");
+          user.admin === true ? navigate("/") : navigate("/");
         });
 
         setUsername("");
