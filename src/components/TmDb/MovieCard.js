@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const MovieCard = ({movie, selectMovie}) => {
     const IMAGE_PATH = "https://image.tmdb.org/t/p/w342"
 
@@ -11,7 +12,7 @@ const MovieCard = ({movie, selectMovie}) => {
                 }
                 <div className={"flex between movie-infos"}>
                     <h5 className={"movie-title"}>{movie.title}</h5>
-                    {movie.vote_average ? <span className={"movie-voting"}>{movie.vote_average}</span> : null}
+                   <h6 className='movie-average'>{movie.vote_average ? <span className={"movie-voting"}>{movie.vote_average}</span> : null} </h6> 
                 </div>
             </div>
         </div>
