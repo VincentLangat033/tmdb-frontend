@@ -10,8 +10,6 @@ function App() {
     <>
     <Navbar />
     <Routes>
-
-       
        <Route exact path="/register" element ={<Register />} />
        <Route path="/login" element={<Login user={user} setUser={setUser}/> } />
        <Route exact path="/" element ={<Movie />} />
