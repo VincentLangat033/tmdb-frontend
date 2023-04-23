@@ -143,10 +143,24 @@ h1 {
 
 .submit-search {
     position: absolute;
-    right: 5px;
-    top: 5px;
-    background-color: transparent;
-    color:  white;
+    right: 2px;
+    top: 10px;
+    background-color: white;
+    color:  rgb(21, 194, 73);
     border: none;
     cursor: pointer;
+}
+
+.tag{
+    color:white;
+    padding:10px 20px;
+    background-color: #1C79CF;
+    border-radius: 50px;
+    margin:8px;
+    display:inline-block;
+    cursor: pointer;
+    margin-left: 15px;
+}
+.tag.highlight{
+    background-color: red;
 }
