@@ -111,11 +111,21 @@ const renderTags = ()=>(
         setMovieList(data.results)
         // console.log("Movies: " + data.results[0])
         setMovie(data.results[0])
+        // saveMoviesToDatabase(data.results);
 
         if (data.results.length) {
             await fetchMovie(data.results[0].id)
         }
     }
+
+    const saveMoviesToDatabase = async () => {
+        try {
+          const response = await axios.post('http://localhost:3000/movies', { movies });
+          console.log(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
     const fetchMoviesByGenres = async (event) => {
         if (event) {
@@ -249,6 +259,7 @@ const renderTags = ()=>(
 
                     <div className={"center-max-size movie-container"}>
                         {renderMovies()}
+                        {/* <button onClick={saveMoviesToDatabase}>Save Movies to Database</button> */}
                         {/* console.log(fetchGenres()) */}
                     </div>
                 </main>
