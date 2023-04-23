@@ -89,7 +89,7 @@ function Movie() {
             {movies.length ?
                 <main>
                     {movie ?
-                        <div className="poster"
+                        <div  className="poster"
                              style={{backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${BACKDROP_PATH}${movie.backdrop_path})`}}>
                             {playing ?
                                 <>

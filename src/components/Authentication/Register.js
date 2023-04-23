@@ -77,7 +77,7 @@ function Register() {
     </form>
 
     <h5 className="already-registered"> clAlready registered? Click here to  <NavLink to='/login'>
-        <a href='#'> Logon  </a>
+        <a href='#'> Login  </a>
         </NavLink></h5>
 </div>
 </div>
