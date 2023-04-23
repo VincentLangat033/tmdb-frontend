@@ -22,6 +22,7 @@ const GENRE_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&';
     const [genreKey, setGenreKey] = useState("crime")
     const [movie, setMovie] = useState({title: "Loading Movies"})
     const [selectedGenres, setSelectedGenres] = useState([]);
+    const [movieList, setMovieList] = useState([])
 
     let selectedGenre = []
 // An array of sample genres I would like to display
@@ -107,6 +108,8 @@ const renderTags = ()=>(
 
         console.log(data.results[0])
         setMovies(data.results)
+        setMovieList(data.results)
+        // console.log("Movies: " + data.results[0])
         setMovie(data.results[0])
 
         if (data.results.length) {
