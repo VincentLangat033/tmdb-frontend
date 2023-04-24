@@ -47,7 +47,7 @@ function Navbar() {
         <a href='#'> Contact Us  </a>
         </NavLink>
         
-        <a href='#' onClick={handleLogoutClick}> Log Out </a>
+        <button onClick={handleLogoutClick}> Log Out </button>
     
         </li>
         <li> Welcome,</li>
