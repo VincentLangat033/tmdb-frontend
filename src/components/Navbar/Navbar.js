@@ -7,7 +7,7 @@ function Navbar() {
 
   function handleLogoutClick(e) {
     e.preventDefault();
-    fetch("https://buk-a-meal.herokuapp.com/logout", 
+    fetch("http://localhost:3000/logout", 
     { method: "DELETE" }
     ).then((r) => {
       if (r.ok) {
