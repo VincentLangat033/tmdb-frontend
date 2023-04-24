@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react"
+import { csrfToken } from 'rails-ujs';
 import './movie.css'
 import axios from 'axios'
 import Youtube from 'react-youtube'
@@ -92,7 +93,13 @@ const renderTags = ()=>(
     useEffect(() => {
         fetchMovies()
         fetchMoviesByGenres();
+        
+        
     }, [selectedGenres])
+    useEffect(()=>{
+        fetchMoviesFromTmdb();
+        fetchRecommendationsFromTmdb();
+    },[])
 
     const fetchMovies = async (event) => {
         if (event) {
@@ -108,6 +115,9 @@ const renderTags = ()=>(
 
         console.log(data.results[0])
         setMovies(data.results)
+        
+    
+      
         setMovieList(data.results)
         // console.log("Movies: " + data.results[0])
         setMovie(data.results[0])
@@ -116,16 +126,124 @@ const renderTags = ()=>(
         if (data.results.length) {
             await fetchMovie(data.results[0].id)
         }
-    }
 
-    const saveMoviesToDatabase = async () => {
+    }
+    const fetchMoviesFromTmdb = async () => {
         try {
-          const response = await axios.post('http://localhost:3000/movies', { movies });
+          const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
+            params: {
+              api_key: 'f4726bbe13ac95e896f3571c43f3519f',
+              language: 'en-US',
+              page: 2, // change this to fetch more pages of movies
+            },
+          });
+          const movies = response.data.results;
+          console.log('Fetched movies from TMDb:', movies);
+          await saveMoviesToDatabase(movies);
+        } catch (error) {
+          console.error('There was an error fetching movies from TMDb 254', error);
+        }
+      };   
+      const fetchRecommendationsFromTmdb = async () => {
+        try {
+          const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
+            params: {
+              api_key: 'f4726bbe13ac95e896f3571c43f3519f',
+              language: 'en-US',
+              page: 2, // change this to fetch more pages of movies
+            },
+          });
+          const movies = response.data.results;
+          console.log('Fetched movies from TMDb:', movies);
+          await saveRecommendationsToDatabase(movies);
+        } catch (error) {
+          console.error('There was an error fetching movies from TMDb 254', error);
+        }
+      };  
+let isSaving = false;
+     
+    const saveMoviesToDatabase = async () => {
+        if (isSaving) {
+            return;
+          }
+          isSaving = true;
+
+        // try {
+        //     for (const movie of movies) {
+        //       const data = {
+        //         movie: {
+        //           title: movie.title,
+        //           overview: movie.overview,
+        //           release_date: movie.release_date,
+        //         },
+        //       };
+        //       const response = await axios.post('http://localhost:3000/movies', data);
+        //       console.log('Movie saved successfully', response.data);
+        //     }
+        //   } catch (error) {
+        //     console.error('There was an error saving the movies', error);
+        //   }
+
+        try {
+            const response = await axios.post('http://localhost:3000/movies', { movies: movies });
+            console.log(response.data);
+          } catch (error) {
+            console.error('There was an error saving movies to the database', error);
+          }
+        
+    //     const data = { movies: { title: movies.title,  overview:movies.overview, release_date: movies.release_date } };
+    //     try {
+    //       const response = await axios.post('http://localhost:3000/movies', data );
+    //       console.log("here are the movies" + movies)
+    //       console.log(response.data);
+    //     } catch (error) {
+    //       console.log("This is there error: " + error);
+    //       console.log("here are the movies" )
+    //     }
+    isSaving = false;
+    };
+    const saveRecommendationsToDatabase = async () => {
+      if (isSaving) {
+          return;
+        }
+   
+
+      // try {
+      //     for (const movie of movies) {
+      //       const data = {
+      //         movie: {
+      //           title: movie.title,
+      //           overview: movie.overview,
+      //           release_date: movie.release_date,
+      //         },
+      //       };
+      //       const response = await axios.post('http://localhost:3000/movies', data);
+      //       console.log('Movie saved successfully', response.data);
+      //     }
+      //   } catch (error) {
+      //     console.error('There was an error saving the movies', error);
+      //   }
+
+      try {
+          const response = await axios.post('http://localhost:3000/movies', { movies: movies });
           console.log(response.data);
         } catch (error) {
-          console.log(error);
+          console.error('There was an error saving movies to the database', error);
         }
-      };
+      
+  //     const data = { movies: { title: movies.title,  overview:movies.overview, release_date: movies.release_date } };
+  //     try {
+  //       const response = await axios.post('http://localhost:3000/movies', data );
+  //       console.log("here are the movies" + movies)
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.log("This is there error: " + error);
+  //       console.log("here are the movies" )
+  //     }
+
+  };
+
+    // saveMoviesToDatabase()
 
     const fetchMoviesByGenres = async (event) => {
         if (event) {
@@ -190,6 +308,33 @@ const renderTags = ()=>(
             />
         ))
     )
+
+
+  
+    const saveMovie = () => {
+        const movie = movies
+          const token = csrfToken();
+          const url = '/movies';
+          const data = { movie: { title: movie.title, genre: movie.genre, overview:movie.overview, release_date: movie.release_date } };
+          const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': token },
+            body: JSON.stringify(data),
+          };
+          fetch(url, options)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then(data => {
+              console.log('Movie saved successfully', data);
+            })
+            .catch(error => {
+              console.error('There was an error saving the movie', error);
+            });
+        };
 
     return (
         <div className="App">
@@ -259,6 +404,9 @@ const renderTags = ()=>(
 
                     <div className={"center-max-size movie-container"}>
                         {renderMovies()}
+                        {/* <button onClick={saveMovie()}>
+                            Save Movie
+                            </button> */}
                         {/* <button onClick={saveMoviesToDatabase}>Save Movies to Database</button> */}
                         {/* console.log(fetchGenres()) */}
                     </div>
