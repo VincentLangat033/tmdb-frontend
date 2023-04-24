@@ -1,8 +1,23 @@
 import React from 'react'
 import './navbar.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  function handleLogoutClick(e) {
+    e.preventDefault();
+    fetch("https://buk-a-meal.herokuapp.com/logout", 
+    { method: "DELETE" }
+    ).then((r) => {
+      if (r.ok) {
+        
+        navigate("/login");
+      }else {
+        alert("This session has not been stored!");
+      }
+    });
+  }
   return (
     <div > 
 <nav>
@@ -31,6 +46,9 @@ function Navbar() {
       <NavLink to='/'>
         <a href='#'> Contact Us  </a>
         </NavLink>
+        
+        <a href='#' onClick={handleLogoutClick}> Log Out </a>
+    
         </li>
         <li> Welcome,</li>
 
