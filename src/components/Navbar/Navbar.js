@@ -49,6 +49,8 @@ function Navbar() {
         
         <button onClick={handleLogoutClick}> Log Out </button>
     
+
+    
         </li>
         <li> Welcome,</li>
 
