@@ -1,13 +1,11 @@
-import { useEffect, useState, useRef } from "react";
+import {useState, useRef } from "react";
 import "./auth.css"
 import { useNavigate, NavLink } from "react-router-dom";
 
 function Login({setUser}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isShown, setIsShown] = useState(false);
-  const [users,setusers]=useState([])
-
+  
   const navigate = useNavigate();
   const form = useRef(null);
   const handleSubmit = (e) => {
