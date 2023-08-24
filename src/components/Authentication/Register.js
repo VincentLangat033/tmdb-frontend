@@ -13,7 +13,7 @@ function Register() {
 
   function handlesubmit(e) {
     e.preventDefault();
-    fetch("http://localhost:3000/users", {
+    fetch("https://mysite-av3r.onrender.com/users", {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify({
